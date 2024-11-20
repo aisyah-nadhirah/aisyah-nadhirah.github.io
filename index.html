@@ -1,146 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Aisyah Nadhirah's Portfolio">
-    <title>Aisyah Nadhirah's Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Love Notes</title>
+  <style>
+    /* SCSS code compiled to CSS */
+    /* Colors */
+    :root {
+      --bg: #000;
+      --tab-bg: #f9f9f9;
+      --f-color: #ba9872;
+      --s-color: #967b5c;
+      --t-color: #a38564;
+      --fo-color: #f9f9f9;
+      --fi-color: #e2e2e2;
+    }
+
+    /* Mixins for positioning */
+    .pos-absolute {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      bottom: 0;
+      left: 0;
+    }
+
+    .pos-relative {
+      position: relative;
+    }
+
+    /* General styles */
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      background-color: var(--bg);
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    @media (max-height: 500px) {
+      body {
+        margin: 25% 0;
+      }
+    }
+
+    /* Styles for the envelope */
+    .envelop {
+      width: 15rem;
+      height: 10rem;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      transition: all 0.3s ease;
+
+      @media (min-width: 400px) and (max-width: 600px) {
+        width: 20rem;
+        height: 15rem;
+      }
+
+      @media (min-width: 600px) {
+        width: 25rem;
+        height: 20rem;
+      }
+
+      &__front-paper {
+        position: absolute;
+        border-radius: 0.7rem;
+        border: 0.35rem solid var(--s-color);
+        background-color: var(--f-color);
+        clip-path: polygon(100% 0%, 50% 70%, 0% 0%, 0% 100%, 100% 100%);
+        z-index: 300;
+      }
+
+      &__back-paper {
+        position: absolute;
+        border-radius: 0.7rem;
+        background-color: var(--s-color);
+        clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 90%);
+        z-index: 100;
+      }
+
+      &__up-paper {
+        position: relative;
+        border-radius: 0.7rem;
+        background-color: var(--s-color);
+        z-index: 400;
+        clip-path: polygon(0% 0%, 100% 0%, 50% 81%);
+      }
+
+      &__sticker {
+        width: 100%;
+        height: 20%;
+        position: absolute;
+        margin: auto;
+        top: 30%;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 400;
+        background-image: url("https://www.freepnglogos.com/uploads/heart-png/emoji-heart-33.png");
+        background-color: var(--fo-color);
+        border: 0.3rem solid var(--fi-color);
+        background-size: 2rem;
+        background-position: center;
+        cursor: pointer;
+
+        @media (max-width: 400px) {
+          background-size: 1.2rem;
         }
-        /* Style the header container */
-        .header {
-            background-image: url('https://www.hollywoodreporter.com/wp-content/uploads/2015/03/stand20by20me20doraemon.jpg?w=1440&h=810&crop=1'); /* Online image URL */
-            background-size: cover;
-            background-position: center;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column; /* Align items vertically */
+
+        @media (min-width: 600px) {
+          height: 15%;
         }
-        /* Style the header text */
-        .header h1 {
-            color: white; /* Uncomment to see the text */
-            font-size: 48px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            margin: 0; /* Remove default margin */
+      }
+
+      &__false-sticker {
+        width: 20%;
+        height: 20%;
+        position: absolute;
+        margin: auto;
+        top: 30%;
+        left: 80%;
+        bottom: 0;
+        right: 0;
+        z-index: 300;
+        background-image: url("https://www.freepnglogos.com/uploads/heart-png/emoji-heart-33.png");
+        background-color: var(--fo-color);
+        border: 0.3rem solid var(--fi-color);
+        background-size: 2rem;
+        background-position: center;
+        cursor: pointer;
+
+        @media (max-width: 400px) {
+          background-size: 1.2rem;
         }
-        .header p {
-            color: white; /* Add a color for the subtitle */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-            font-size: 20px;
-            margin-top: 10px; /* Space between h1 and p */
+
+        @media (min-width: 600px) {
+          height: 15%;
         }
-        nav {
-            background-color: #444;
-            display: flex;
-            justify-content: center;
-            padding: 0.5rem;
+      }
+
+      &__content {
+        position: absolute;
+        z-index: 200;
+      }
+    }
+
+    .love-notes {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .note {
+      width: 95%;
+      height: 30%;
+      background-color: var(--tab-bg);
+      position: absolute;
+      overflow: hidden;
+      transition: height 0.5s, opacity 0.25s;
+      box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+
+      &:nth-child(1) {
+        bottom: 60%;
+      }
+
+      &:nth-child(2) {
+        bottom: 40%;
+      }
+
+      &:nth-child(3) {
+        bottom: 20%;
+      }
+
+      &:hover {
+        cursor: pointer;
+        height: 45%;
+      }
+
+      &__text {
+        font-family: "Sofia";
+        padding: 1rem;
+
+        p {
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+          text-align: center;
+
+          @media (min-width: 300px) and (max-width: 600px) {
+            font-size: 1.025rem;
+          }
+
+          @media (min-width: 600px) {
+            font-size: 1.15rem;
+          }
         }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
-        section {
-            margin: 2rem auto;
-            max-width: 1200px;
-            padding: 1rem;
-        }
-        .intro, .skills, .projects, .contact {
-            margin-bottom: 2rem;
-        }
-        .skills ul, .projects ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .skills li, .projects li {
-            background-color: #fff;
-            margin-bottom: 0.5rem;
-            padding: 1rem;
-            border: 1px solid #ddd;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: white;
-        }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            max-width: 600px;
-            margin: auto;
-        }
-        .contact-form input, .contact-form textarea {
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-        }
-        .contact-form button {
-            padding: 0.7rem;
-            border: none;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-        }
-    </style>
+      }
+    }
+
+    .scissors {
+      cursor: url("https://i.postimg.cc/GtLCdKxR/sisors.png"), pointer;
+
+      &:active {
+        cursor: url("https://i.postimg.cc/GtXQ7WPZ/pngwing-com.png"), pointer;
+      }
+    }
+
+    .cursor {
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body>
-    <div class="header"> <!-- Updated header -->
-        <h1>Aisyah Nadhirah</h1>
-        <p>Software Developer & Tech Enthusiast</p>
-        <p>tak habis buat lagi</p>
+
+<body class="scissors">
+  <div class="envelop">
+    <div class="envelop__front-paper"></div>
+    <div class="envelop__back-paper"></div>
+    <div class="envelop__up-paper js-up-paper"></div>
+    <div class="envelop__sticker js-sticker"></div>
+    <div class="envelop__false-sticker"></div>
+    <div class="envelop__content js-envelop-content">
+      <div class="love-notes">
+        <div class="note js-note">
+          <div class="note__text">
+            <p>
+              Oii minha princesa, aqui estamos completando mais um mês juntos, é sempre uma alegria poder acordar e saber que tenho você ao meu lado e sentir que isso será para sempre é magnífico
+            </p>
+          </div>
+        </div>
+        <div class="note js-note">
+          <div class="note__text">
+            <p>quero que eles nunca acabem e que tenham sempre muitos outros pela frente.</p>
+          </div>
+        </div>
+        <div class="note js-note">
+          <div class="note__text">
+            <p>você é a melhor coisa que me aconteceu, obrigado por me escolher todos os dias.</p>
+            <p>Te amo muito! &hearts;.</p>
+          </div>
+        </div>
+      </div>
     </div>
-    
-    <nav>
-        <a href="#intro">About Me</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    
-    <section id="intro" class="intro">
-        <h2>About Me</h2>
-        <p>Hello! I'm Aisyah Nadhirah, a passionate software developer with a focus on creating efficient and scalable applications. I specialize in web development, software engineering, and I'm always exploring new technologies to enhance my skillset.</p>
-    </section>
+  </div>
 
-    <section id="skills" class="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Programming Languages: Java, PHP, C++, OCaml HAHAHA, JavaScript</li>
-            <li>Web Development: HTML, CSS, JavaScript, React, Node.js, Dart?</li>
-            <li>Database Management: MySQL, SQL, HeidiSQL</li>
-            <li>Version Control: Git, GitHub</li>
-        </ul>
-    </section>
+  <script>
+    // Variables
+    let mobile_media_query = window.matchMedia("(max-width: 400px)");
+    let tablet_media_query = window.matchMedia(
+      "(min-width: 400px) and (max-width: 600px)"
+    );
+    const notes = document.querySelectorAll(".js-note");
 
-    <section id="projects" class="projects">
-        <h2>Projects</h2>
-        <ul>
-            <li><strong>JTMK Information Application</strong>: An app designed to help students.</li>
-            <li><strong>Chat Management System</strong>: A collaborative tool for team chats and virtual meetings, integrated with Microsoft Office 365.</li>
-        </ul>
-    </section>
+    // Function that resets the size of the notes.
+    function recize_notes() {
+      for (let i = 0; i < notes.length; i++) {
+        if (notes[i].classList.contains("active")) {
+          notes[i].classList.remove("active");
+          gsap.set(notes[i], {
+            height: "30%",
+            clearProps: "all"
+          });
+        }
+      }
+    }
 
-    <section id="contact" class="contact">
-        <h2>Contact</h2>
-        <form class="contact-form" action="#" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Actually please dont send messages ok</button>
-        </form>
-    </section>
-    
-    <footer>
-        <p>&copy; 2024 Aisyah Nadhirah. All Rights Reserved.</p>
-    </footer>
+    // Main function that enables all the notes.
+    function notes_ready() {
+      gsap.to(".js-envelop-content", {
+        height: "110%",
+        duration: 0.5
+      });
+
+      for (let i = 0; i < notes.length; i++) {
+        notes[i].addEventListener("click", function () {
+          if (mobile_media_query.matches) {
+            if (this.classList.contains("active")) {
+              this.classList.remove("active");
+              gsap.set(this, {
+                height: "30%",
+                clearProps: "all"
+              });
+            } else {
+              recize_notes();
+              this.classList.add("active");
+              gsap.set(this, {
+                height: "80%",
+                backgroundColor: "var(--fi-color)",
+                zIndex: "1"
+              });
+            }
+          } else if (tablet_media_query.matches) {
+            if (this.classList.contains("active")) {
+              this.classList.remove("active");
+              gsap.set(this, {
+                height: "30%",
+                clearProps: "all"
+              });
+            } else {
+              recize_notes();
+              this.classList.add("active");
+              gsap.set(this, {
+                height: "50%",
+                backgroundColor: "var(--fi-color)",
+                zIndex: "1"
+              });
+            }
+          } else {
+            if (this.classList.contains("active")) {
+              this.classList.remove("active");
+              gsap.set(this, {
+                height: "30%",
+                clearProps: "all"
+              });
+            } else {
+              recize_notes();
+              this.classList.add("active");
+              gsap.set(this, {
+                height: "40%",
+                backgroundColor: "var(--fi-color)",
+                zIndex: "1"
+              });
+            }
+          }
+        });
+      }
+    }
+
+    // Trigger notes_ready after 1 second
+    setTimeout(function () {
+      notes_ready();
+    }, 1000);
+
+    // Make sure to animate the envelope sticker
+    const sticker = document.querySelector(".js-sticker");
+
+    sticker.addEventListener("click", function () {
+      document.querySelector(".envelop__sticker").style.display = "none";
+      document.querySelector(".envelop__false-sticker").style.display = "block";
+      gsap.to(".js-up-paper", {
+        rotationX: 90,
+        duration: 1
+      });
+      gsap.to(".envelop__back-paper", {
+        opacity: 1,
+        duration: 1
+      });
+      gsap.to(".envelop__front-paper", {
+        opacity: 0,
+        duration: 1
+      });
+    });
+  </script>
 </body>
+
 </html>
