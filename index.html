@@ -172,7 +172,7 @@
 .paypal__footer {
   position: relative;
   padding: 30px 20px;
-  border-top: 2px dashed #FF84A1;
+  border-top: 2px dashed #bfde99;
 
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -193,12 +193,12 @@
 
 .paypal__footer::before {
   left: 0;
-  border-left: 7px solid #ff85a1;
+  border-left: 7px solid #bfde99;
 }
 
 .paypal__footer::after {
   right: 0;
-  border-right: 7px solid #ff85a1;
+  border-right: 7px solid #bfde99;
 }
 
 .paypal__barcode {
@@ -435,7 +435,7 @@
             <span class="paypal__cart-total">am i still ur friend?</span>
             <span class="paypal__item-price">
                 <button class="btn yes-btn" id="yes-btn">Yes</button>
-                <button class="btn no-btn">No</button>
+                <button class="btn no-btn" id="no-btn">No</button>
             </span>
           </li>
         </ul>
@@ -448,26 +448,29 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script>
-      // Add click event listener for the button
+      // Add click event listener for the "Yes" button
       document.getElementById('yes-btn').addEventListener('click', function() {
-          // Show SweetAlert modal
           Swal.fire({
-              title: 'Are you sure?',
-              text: 'You are about to proceed!',
-              icon: 'question',
-              showCancelButton: false, // Hide the "No" button
-              confirmButtonText: 'Apology Accepted', // Change "Yes" to "Apology Accepted"
-          }).then((result) => {
-              // If the user confirms, show a success message
-              if (result.isConfirmed) {
-                  Swal.fire(
-                      'Accepted!',
-                      'The apology has been accepted.',
-                      'success'
-                  );
-              }
+              title: 'Apology Accepted!',
+              text: 'Yeeayyy, we are still friends.',
+              icon: 'success'
           });
       });
+  
+      document.getElementById('no-btn').addEventListener('click', function() {
+        // Show SweetAlert modal for "No" button
+        Swal.fire({
+            title: 'Why did you even click the button?',
+            text: 'You know what this means!',
+            icon: 'warning',
+            confirmButtonText: 'Close',
+            background: '#dc3545',  // Red background
+            color: 'white',  // White font color
+            customClass: {
+                confirmButton: 'btn'
+            }
+        });
+    });
   </script>
 
   </body>
