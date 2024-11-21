@@ -7,11 +7,11 @@
   <head>
     <meta charset="utf-8">
     <title>UI 1</title>
-
     <link rel="shortcut icon" href="paypal.png">
-
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
     <link rel="stylesheet" href="style.css" charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
       html,
 body {
@@ -20,7 +20,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: #e6e6ab;
+  background-color: #7ab0e1;
   font-family: "Source Sans Pro", "Helvetica", sans-serif;
   letter-spacing: 1.5px;
 }
@@ -74,7 +74,8 @@ body {
 }
 
 .paypal__header-info {
-  flex: 1 0 50%;
+  /* flex: 1 0 50%; */
+  float: right;
 }
 
 .paypal__date,
@@ -119,7 +120,7 @@ body {
   display: block;
   margin-top: 0;
   margin-bottom: 25px;
-  text-align: center;
+  text-align: left;
 }
 
 .paypal__cart-list {
@@ -163,8 +164,8 @@ body {
 }
 
 .paypal__cart-total {
-  font-size: 20px;
-  text-transform: uppercase;
+  font-size: 19px;
+  text-transform: lowercase;
 }
 
 .paypal__footer {
@@ -318,6 +319,56 @@ body {
   animation-delay: 3.2s;
 }
 
+/* General Button Styling */
+.btn {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 10px;
+}
+
+/* Yes Button Styling */
+.yes-btn {
+  background-color: #2ecc71; /* Green */
+  color: white;
+}
+
+.yes-btn:hover {
+  background-color: #27ae60;
+  transform: scale(1.05);
+}
+
+.yes-btn:active {
+  background-color: #27ae60;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+}
+
+/* No Button Styling */
+.no-btn {
+  background-color: #e74c3c; /* Red */
+  color: white;
+}
+
+.no-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+}
+
+.no-btn:active {
+  background-color: #c0392b;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
+}
+
+/* Button Container */
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
     </style>
   </head>
   <body>
@@ -330,8 +381,8 @@ body {
         </div>
 
         <div class="paypal__header-info">
-          <span class="paypal__date">25.04.2016</span>
-          <span class="paypal__ref">0f-113</span>
+          <span class="paypal__date">22/11/2024</span>
+          <span class="paypal__ref">Aisyah Nadhirah</span>
         </div>
       </div>
 
@@ -349,26 +400,42 @@ body {
 
         <ul class="paypal__cart-list">
           <li class="paypal__cart-item">
-            <span class="paypal__index">1</span>
-            <span class="paypal__item-name">t-Shirt Lacoste</span>
-            <span class="paypal__item-price">$48.00</span>
+            <!-- <span class="paypal__index">1</span> -->
+            <span class="paypal__item-name">
+              sndshsh shds hshsh shdsd sdhsdhdshsdh dshdshdshdsh
+              dhsshdsdhdsh dshsdhdhsd dshdshsdhds hdshdshsdhds dshdshds
+              hdsgsddsg dshdshhds dsgdsgsdgds dshdshdsh.
+            </span>
+            <!-- <span class="paypal__item-price">$48.00</span> -->
+          </li>
+          
+          <li class="paypal__cart-item">
+            <!-- <span class="paypal__index">1</span> -->
+            <span class="paypal__item-name">
+              sndshsh shds hshsh shdsd sdhsdhdshsdh dshdshdshdsh
+              dhsshdsdhdsh dshsdhdhsd dshdshsdhds hdshdshsdhds dshdshds
+              hdsgsddsg dshdshhds dsgdsgsdgds dshdshdsh.
+            </span>
+            <!-- <span class="paypal__item-price">$48.00</span> -->
           </li>
 
           <li class="paypal__cart-item">
-            <span class="paypal__index">2</span>
-            <span class="paypal__item-name">Snickers Nike</span>
-            <span class="paypal__item-price">$125.00</span>
+            <!-- <span class="paypal__index">1</span> -->
+            <span class="paypal__item-name">
+              sndshsh shds hshsh shdsd sdhsdhdshsdh dshdshdshdsh
+              dhsshdsdhdsh dshsdhdhsd dshdshsdhds hdshdshsdhds dshdshds
+              hdsgsddsg dshdshhds dsgdsgsdgds dshdshdsh.
+            </span>
+            <!-- <span class="paypal__item-price">$48.00</span> -->
           </li>
 
-          <li class="paypal__cart-item">
-            <span class="paypal__index">3</span>
-            <span class="paypal__item-name">All Stars</span>
-            <span class="paypal__item-price">$95.00</span>
-          </li>
 
           <li class="paypal__cart-item">
-            <span class="paypal__cart-total">Total</span>
-            <span class="paypal__item-price">$268.00</span>
+            <span class="paypal__cart-total">am i still ur friend?</span>
+            <span class="paypal__item-price">
+                <button class="btn yes-btn" id="yes-btn">Yes</button>
+                <button class="btn no-btn">No</button>
+            </span>
           </li>
         </ul>
       </div>
@@ -377,6 +444,30 @@ body {
         <img src="https://i.ibb.co/c8CQvBq/barcode.png" alt="Paypal Barcode" class="paypal__barcode">
       </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script>
+      // Add click event listener for the button
+      document.getElementById('yes-btn').addEventListener('click', function() {
+          // Show SweetAlert modal
+          Swal.fire({
+              title: 'Are you sure?',
+              text: 'You are about to proceed!',
+              icon: 'question',
+              showCancelButton: false, // Hide the "No" button
+              confirmButtonText: 'Apology Accepted', // Change "Yes" to "Apology Accepted"
+          }).then((result) => {
+              // If the user confirms, show a success message
+              if (result.isConfirmed) {
+                  Swal.fire(
+                      'Accepted!',
+                      'The apology has been accepted.',
+                      'success'
+                  );
+              }
+          });
+      });
+  </script>
 
   </body>
 </html>
