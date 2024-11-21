@@ -1,151 +1,382 @@
+<!--
+  Inspired by Vladyslav Tyzun / Awesomed
+  https://dribbble.com/shots/2738907-PayPal-Email-Receipt
+-->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup Modal Example</title>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UI 1</title>
 
+    <link rel="shortcut icon" href="paypal.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" charset="utf-8">
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #e8efff;
-        }
+  background-color: #e6e6ab;
+  font-family: "Source Sans Pro", "Helvetica", sans-serif;
+  letter-spacing: 1.5px;
+}
 
-        .container {
-            text-align: center;
-        }
+.inspired-by {
+  display: block;
+  position: relative;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+}
 
-        h1 {
-            font-size: 30px;
-            color: #333;
-            margin-bottom: 30px;
-        }
+.paypal {
+  position: relative;
+  left: 50%;
+  display: inline-block;
+  /*min-width: 500px;*/
+  max-width: 100%;
+  width: 80%;
+  margin: 50px auto 25px;
+  padding: 20px 0;
+  clear: both;
 
-        .button {
-            padding: 15px;
-            background-color: #6200ea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
 
-        .button:hover {
-            background-color: #3700b3;
-        }
+.paypal__header {
+  display: flex;
+  -ms-align-items: flex-start;
+  align-items: flex-start;
 
-        /* Modal background */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
+  padding: 30px 30px 45px;
+  background: #fff;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
 
-        /* Card popup */
-        .modal-content {
-            background-color: white;
-            width: 50%;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            max-height: 80vh; /* Set max height to allow scrolling */
-            overflow-y: auto; /* Enable scrolling if content exceeds max-height */
-        }
+.paypal__logo-wrapper {
+  flex: 1 0 40%;
+}
 
-        /* Close button */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            color: #6200ea;
-            cursor: pointer;
-        }
+.paypal__logo {
+  display: block;
+  width: 50px;
+  height: auto;
+  margin-left: 15px;
+}
 
-        .close-btn:hover {
-            color: #3700b3;
-        }
+.paypal__header-info {
+  flex: 1 0 50%;
+}
+
+.paypal__date,
+.paypal__ref {
+  display: block;
+  font-size: 19px;
+  color: #aaa;
+  font-weight: 300;
+}
+
+.paypal__date {
+  margin-bottom: 5px;
+}
+
+.paypal__subheader-wrapper {
+  background: #fff;
+  padding-bottom: 20px;
+}
+
+.paypal__subheader {
+  padding: 0 45px 0 40px;
+  border-left: 5px solid #029de0;
+}
+
+.paypal__username {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.paypal__help-text {
+  color: #aaa;
+  font-weight: 300;
+}
+
+.paypal__cart {
+  display: block;
+  padding: 25px 30px 45px;
+}
+
+.paypal__cart-title {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.paypal__cart-list {
+  margin: 0;
+  padding: 0 15px;
+  list-style: none;
+}
+
+.paypal__cart-item {
+  display: block;
+  padding-top: 20px;
+  margin-bottom: 20px;
+  border-top: 2px dashed #aaa;
+
+  font-size: 18px;
+}
+
+.paypal__cart-item:first-child {
+  border-top: 0;
+}
+
+.paypal__cart-item:last-child {
+  margin-bottom: 0;
+  border-top: 2px solid #FFE155;
+}
+
+.paypal__index {
+  padding-right: 15px;
+  color: #aaa;
+  font-weight: 300;
+}
+
+.paypal__item-name {
+  color: #aaa;
+  font-weight: 300;
+}
+
+.paypal__item-price {
+  float: right;
+  letter-spacing: 1px;
+}
+
+.paypal__cart-total {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.paypal__footer {
+  position: relative;
+  padding: 30px 20px;
+  border-top: 2px dashed #FF84A1;
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.paypal__footer::before,
+.paypal__footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  border: 4px solid transparent;
+
+  -webkit-transform: translateY(calc(-50% - 1px));
+  -ms-transform: translateY(calc(-50% - 1px));
+  -o-transform: translateY(calc(-50% - 1px));
+  transform: translateY(calc(-50% - 1px));
+}
+
+.paypal__footer::before {
+  left: 0;
+  border-left: 7px solid #ff85a1;
+}
+
+.paypal__footer::after {
+  right: 0;
+  border-right: 7px solid #ff85a1;
+}
+
+.paypal__barcode {
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+  height: auto;
+}
+
+/**
+ * Paypal Animations
+ */
+
+@keyframes show-paypal {
+ 0% {
+   opacity: 0;
+   transform: scale(0) translateX(-50%);
+ }
+
+ 85% {
+   opacity: 0;
+ }
+
+ 100% {
+   opacity: 1;
+   transform: scale(1) translateX(-50%);
+ }
+}
+
+.paypal {
+  transform-origin: top left;
+  animation: show-paypal 1s ease-out forwards;
+}
+
+@keyframes show-subheader {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  65% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.paypal__subheader {
+  opacity: 0;
+  animation: show-subheader 1s 0.5s ease-out forwards;
+}
+
+@keyframes slide-down {
+  to {
+    transform: perspective(100px) rotateX(0) translate3d(0, 0, 0);
+  }
+}
+
+.paypal__cart {
+  background-color: #fff;
+
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transform: perspective(100px) rotateX(-90deg) translate3d(0, 0, 0);
+
+  animation: slide-down 0.4s 2s ease-out forwards;
+}
+
+.paypal__footer {
+  background-color: #fff;
+
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transform: perspective(100px) rotateX(-90deg) translate3d(0, 0, 0);
+
+  animation: slide-down 0.4s 2.5s ease-out forwards;
+}
+
+@keyframes show-cart-title {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.paypal__cart-title {
+  opacity: 0;
+  transform: translateY(10px);
+
+  animation: show-cart-title 0.5s 2.25s ease-in forwards;
+}
+
+@keyframes show-cart-item {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.paypal__cart-item {
+  opacity: 0;
+  transform: translateX(-30px);
+
+  animation: show-cart-item 0.3s 2.75s ease-in forwards;
+}
+
+.paypal__cart-item:nth-child(2) {
+  animation-delay: 2.9s;
+}
+
+.paypal__cart-item:nth-child(3) {
+  animation-delay: 3.05s;
+}
+
+.paypal__cart-item:nth-child(4) {
+  animation-delay: 3.2s;
+}
 
     </style>
-</head>
-<body>
+  </head>
+  <body>
 
-    <div class="container">
-        <h1>Click the Button</h1>
-        <button class="button" id="myButton">Click Me!</button>
-    </div>
+    <div class="paypal">
 
-    <!-- Modal (popup) -->
-    <div class="modal" id="popupModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeBtn">&times;</span>
-            <h2>Apology Card</h2>
-            <p>
-                hi, r u free tonight? for me to text u? but i dont want u to feel suffocated with this. 
-
-                r u ok with us like this? we’re not talking for months. to meet up, i knew im wrong. u already initiated many times, u made the efforts, but i’m the one who didn’t. i’m sorry for things i did wrong to u and may have hurt u in ways i didn’t realize. i removed n unfollowed u on some social media accounts, it’s just the initial thoughts of how different u were to me and to ur other friends. i just want to protect my feelings. if u think it’s not a big deal to u n ure ok with that, i’m sorry u had to listen to my explanation bcs u seemed unbothered though and this is just what i feel.
-
-                <br><br><br>it will be a lie if i say i didn’t think about u even once. if u think it hurts me, yes, it did. it hurts so much. i thought the least ure gonna do is wish me happy birthday since u didn’t congratulate me for my convocation even ure apart of my dip journey. i waited for ur text the whole day, even with people wishing me, i still hoped u would.
-
-                it feels weird u know bcs ure once someone really close to me, and my family keeps on asking what ure doing now. i just said, yasmin okay je, dia keje sambil study. i don’t say we don’t talk anymore because i hope one day we will again. ure so independent and that made my family always remember u though. 
-
-                <br><br><br>i remembered how excited u were when u reached 600 followers on ig, and i was genuinely happy for u cuz i know it’s hard to get to that stage. i’m happy for ur milestones, which i knew would lead to many more things for u n ur company in the future. ure really aspiring for that one. the last 3 weeks or 4, can’t remember, i saw ur company lorry at my neighborhood cuz i just finished class that time. i wanted to tell u, but then i remembered we’re not talking for months. n in afraid if i text u, u’d be like, ok.
-
-                how i cant remember u? everything in my surroundings reminds me of you even with my family. i knew that ure important to me. ure a very supportive friend in whatever ur friends do. i feel like ure comfortable and warm in person, and maybe ure not into texting cuz i feel the distant there. i dont want u to feel suffocated with my presence.
-
-                <br><br><br>i know priorities have changed. but do u still love me as ur friend? or am i still a friend to u? i know u have many friends though, but i just want to know, which i hope u still do.
-
-                <br><br><br>just let me know.
-
-                <br><br><br>dont get me wrong, i texted u at night cuz i dont want to disturb ur work and study and i dont want this bottled up. i hope to get things right with u. 
-
-                <br><br><br>thank you for spending ur time to read this, take ur time if u need to digest this, and things if u want to address about me or my behaviour :)
-            </p>
+      <div class="paypal__header">
+        <div class="paypal__logo-wrapper">
+          <img src="https://i.ibb.co/DrvmW5y/paypal.png" alt="Paypal" class="paypal__logo">
         </div>
+
+        <div class="paypal__header-info">
+          <span class="paypal__date">25.04.2016</span>
+          <span class="paypal__ref">0f-113</span>
+        </div>
+      </div>
+
+      <div class="paypal__subheader-wrapper">
+        <div class="paypal__subheader">
+          <h1 class="paypal__username">VladysLav, Hi</h1>
+          <span class="paypal__help-text">
+            this sender wanted to tell you this:
+          </span>
+        </div>
+      </div>
+
+      <div class="paypal__cart">
+        <h2 class="paypal__cart-title">Apology Card:</h2>
+
+        <ul class="paypal__cart-list">
+          <li class="paypal__cart-item">
+            <span class="paypal__index">1</span>
+            <span class="paypal__item-name">t-Shirt Lacoste</span>
+            <span class="paypal__item-price">$48.00</span>
+          </li>
+
+          <li class="paypal__cart-item">
+            <span class="paypal__index">2</span>
+            <span class="paypal__item-name">Snickers Nike</span>
+            <span class="paypal__item-price">$125.00</span>
+          </li>
+
+          <li class="paypal__cart-item">
+            <span class="paypal__index">3</span>
+            <span class="paypal__item-name">All Stars</span>
+            <span class="paypal__item-price">$95.00</span>
+          </li>
+
+          <li class="paypal__cart-item">
+            <span class="paypal__cart-total">Total</span>
+            <span class="paypal__item-price">$268.00</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="paypal__footer">
+        <img src="https://i.ibb.co/c8CQvBq/barcode.png" alt="Paypal Barcode" class="paypal__barcode">
+      </div>
     </div>
 
-    <script>
-        // JavaScript code for popup modal functionality
-        const button = document.getElementById("myButton");
-        const modal = document.getElementById("popupModal");
-        const closeBtn = document.getElementById("closeBtn");
-
-        // Show modal when button is clicked
-        button.addEventListener("click", function() {
-            modal.style.display = "flex"; // Show the modal
-        });
-
-        // Close modal when close button is clicked
-        closeBtn.addEventListener("click", function() {
-            modal.style.display = "none"; // Hide the modal
-        });
-
-        // Close modal if the user clicks outside the modal
-        window.addEventListener("click", function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none"; // Hide the modal
-            }
-        });
-    </script>
-
-</body>
+  </body>
 </html>
