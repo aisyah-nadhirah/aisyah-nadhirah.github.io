@@ -11,9 +11,9 @@ https://templatemo.com/tm-578-first-portfolio
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 :root {
-  --white-color:                  #ffffff;
-  --primary-color:                #535da1;
-  --secondary-color:              #d87bc2;
+  --white-color:                  #EEEEEE;
+  --primary-color:                #36656B;
+  --secondary-color:              #000000;
   --section-bg-color:             #f9f9f9;
   --dark-color:                   #000000;
   --p-color:                      #717275;
@@ -150,6 +150,31 @@ strong {
   padding: 10px 30px;
 }
 
+.project-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: #fff;
+    opacity: 0.9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Status colors */
+.project-status.completed {
+    background-color: #28a745; /* green */
+}
+
+.project-status.ongoing {
+    background-color: #ffc107; /* yellow/orange */
+}
+
+.project-status.upcoming {
+    background-color: #17a2b8; /* blue */
+}
 
 /*---------------------------------------
   AVATAR IMAGE               
